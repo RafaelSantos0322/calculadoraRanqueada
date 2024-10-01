@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="partida, jogo, site, game, fun">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <title>Calculadora de Partida</title>
+</head>
+<body >
+     
+        <main id="containerCalculadora">
+
+            <div id="apresentacao">
+                <h1>Calculadora De Ranking</h1>
+            </div>
+            <div class="container">
+                <label> Número de Vitórias </label> 
+                <input type="number" id="win" placeholder="  Ex.: 1, 10, 30 ...." >
+            </div>
+
+            <div class="container">
+                <label> Número de Derrotas </label>
+                <input type="number" id="loss" placeholder="  Ex.: 1, 10, 30 ...." >
+            </div>
+
+            <button id="btn_calcular">
+                Calcular
+            </button>
+
+            <div  id="resposta">
+
+            </div>
+
+        </main>
+
+        <script>
+            $("#btn_calcular").click((e) => {
+                e.preventDefault()
+
+                const nWin = $("#win").val();
+                const nLoss = $("#loss").val();
+                
+                if(nWin && nLoss){
+                    let cWin = Math.round(nWin)
+                    let cLoss = Math.round(nLoss) 
+                    let saldo = cWin - cLoss
+                    let ranking
+                    if(saldo <= 10){
+                        ranking = "Ferro"
+                    } 
+                    else if( saldo <= 20){
+                        ranking = "Bronze"
+                    } 
+                    else if ( saldo <= 50){
+                        ranking = "Prata"
+                    }
+                    else if ( saldo <= 80){
+                        ranking = "Ouro"
+                    } 
+                    else if( saldo <= 90) {
+                        ranking = "Diamante"
+                    }  
+                    else if( saldo <= 100){
+                        ranking = "Lendário"
+                    }
+                    else if( saldo >= 101){
+                        ranking = "Imortal"
+                    }
+
+                    $("#resposta").html(`<h3> O Herói tem saldo de ${saldo} vitórias e está no nível **${ranking}**</h3>`)
+
+                } else {
+                    alert("Favor digitar número válido!")
+                }
+            })
+        </script>
+</body>
+</html>
